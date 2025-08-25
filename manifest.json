@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Story API Collector",
+  "version": "1.5",
+  "description": "Capture Microsoft Security story API and export as .jsonc for https://github.com/f-bader/XDRStoryParser",
+  "permissions": ["scripting", "storage", "downloads"],
+  "host_permissions": ["*://security.microsoft.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://security.microsoft.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js"],
+      "matches": ["*://security.microsoft.com/*"]
+    }
+  ]
+}
